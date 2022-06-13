@@ -1,0 +1,11 @@
+Container{
+    background-color: antiquewhite;
+    font-size: small;
+}
+.navbar{
+    color: rgb(155, 152, 148);
+    background-color: aliceblue;
+}
+li{
+    list-style: none;
+}
