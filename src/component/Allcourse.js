@@ -4,10 +4,9 @@ import Addvideo from './Addvideo';
 import {BrowserRouter as Router,Route,Routes,Link} from 'react-router-dom'
 import {toast} from "react-toastify";
 import StartFirebase from './firebaseConfig';
-import { Timestamp,collection, onSnapshot, orderBy, query,addDoc,doc } from "firebase/firestore";
-import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { Timestamp,collection, onSnapshot, orderBy, query,addDoc,doc, deleteDoc } from "firebase/firestore";
+import { ref, uploadBytesResumable, getDownloadURL, deleteObject } from "firebase/storage";
 import { storage, db, auth } from "../component/firebaseConfigcopy";
-import  {v4 as uuidv4 } from "uuid"
 export default function Allcourse() {
   const [articles, setArticles] = useState([]);
   useEffect(() => {
@@ -19,13 +18,29 @@ export default function Allcourse() {
         ...doc.data(),
       }));
       setArticles(articles);
-      console.log(articles);
+     
     });
   }, []);
+  
+ const handleDelete =(id, LectImage,coverImage)=>  {
+  try {
+      deleteDoc(doc(db, "Course", id));
+      // collection(db, "Book");
+      alert("Article deleted successfully", { type: "success" });
+      const storageRef = ref(storage,LectImage);
+      const storageRefs = ref(storage,coverImage);
+      deleteObject(storageRefs);
+      deleteObject(storageRef);
+    } catch (error) {
+      alert("Error deleting article", { type: "error" });
+     
+    }
+  
+};
   return (
     <div> 
        {     articles.length === 0 ?(
-		<p>please create a new Question</p>
+		<p>please create a new Course</p>
 	  ) : (
         <div className="row">
             Course List
@@ -33,7 +48,7 @@ export default function Allcourse() {
 <nav>
       <div className="nav nav-tabs nav-tabs-bordered mb-3 my-4" id="nav-tab" role="tablist">
         <button className="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Course list</button>
-        <button className="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">creat course</button>
+        <button className="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">create course</button>
        
         
       </div>
@@ -55,7 +70,7 @@ export default function Allcourse() {
           </thead>
           <tbody>
           {articles.length === 0 ? (
-        <p>No articles found!</p>
+        <p>No courses found!</p>
       ) : (
         articles.map(
           ({
@@ -80,14 +95,14 @@ export default function Allcourse() {
           }) => (
               <tr key={id}>
 
-<td> <a href="viewhome.php"> <img data-bs-toggle="modal"  width="50" height="50" src={Certificate}/> </a>
+<td>  <img data-bs-toggle="modal"  width="50" height="50" src={ coverimage}/> 
 <a></a> </td>
 <td>{Coursename}</td>
 <td>{Level}</td>
 <td>{TotalHoure}</td>
 <td>{Lecturename}</td>
 <td>{Rating}</td>
-<td><button className="btn btn-sm btn-danger">delete</button>  <Link 
+<td><button onClick={()=>{handleDelete(id,LectureImage,coverimage);}} className="btn btn-sm btn-danger">delete</button>  <Link 
 to={`/viewvideo`} 
 state={{ 
   ids:id,

@@ -15,7 +15,11 @@ export function  Book() {
  const [state,setState]=useState({
     head: ["image","title","reating","catagory","Action"] });
   const [articles, setArticles] = useState([]);
-
+const [data,setData]=useState({
+  id:'',
+  imageLink:'',
+  pdf:''
+})
   useEffect(() => {
     const articleRef = collection(db, "Book");
     const q = query(articleRef, orderBy("createdAt", "desc"));
@@ -28,17 +32,18 @@ export function  Book() {
      
     });
   }, []);
- function handleDelete (id, BookImage,PDF)  {
+ 
+ const handleDelete =(id, BookImage,PDF)=>  {
     try {
         deleteDoc(doc(db, "Book", id));
         // collection(db, "Book");
-        toast("Article deleted successfully", { type: "success" });
+        alert("Article deleted successfully", { type: "success" });
         const storageRef = ref(storage,BookImage);
         const storageRefs = ref(storage,PDF);
         deleteObject(storageRefs);
         deleteObject(storageRef);
       } catch (error) {
-        toast("Error deleting article", { type: "error" });
+        alert("Error deleting article", { type: "error" });
         console.log(error);
       }
     
@@ -84,12 +89,21 @@ export function  Book() {
           }) => (
               <tr key={id}>
   
- <td> <Link to="/viewbook"> <img data-bs-toggle="modal"  width="30" height="30" src={BookImage}/> </Link>
+ <td> <Link to={ `/viewbook/${id}` }
+      state={{   ids:id ,
+        Categorys:Category,
+        Discrptions:Discrption,
+        BookTitles:BookTitle,
+        Authers:Auther,
+        Ratings:Rating,
+        BookImages:BookImage,
+        PDFs:PDF,
+        createdAts:createdAt,}} > <img data-bs-toggle="modal"  width="30" height="30" src={BookImage}/> </Link>
 <a></a> </td>  
 <td className="text-black">{BookTitle}</td>
 <td>{Rating}</td>
 <td>{Category}</td>
-<td><button onClick={handleDelete(id,BookImage,PDF)} class="btn btn-sm btn-danger">delete</button>  <Link  to={ `/viewbook/${id}` }
+<td><button onClick={()=>{handleDelete(id,BookImage,PDF);}} class="btn btn-sm btn-danger">delete</button>  <Link  to={ `/viewbook/${id}` }
       state={{   ids:id ,
         Categorys:Category,
         Discrptions:Discrption,

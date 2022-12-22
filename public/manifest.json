@@ -1,20 +1,20 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "SSCUAA",
+  "name": "Take control of your career Whether you want to transition into a new field, improve in your role or bring your big ideas to life, SSCUAA Skills can help you get there. With our technology skills platform, you can build in-demand skills and apply them in the real world with confidence.",
   "icons": [
     {
-      "src": "favicon.ico",
+      "src": "img/logo-2.jpg",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/x-icon"
     },
     {
       "src": "logo192.png",
-      "type": "image/png",
+      "type": "img/logo-192.png",
       "sizes": "192x192"
     },
     {
       "src": "logo512.png",
-      "type": "image/png",
+      "type": "img/logo-512.png",
       "sizes": "512x512"
     }
   ],

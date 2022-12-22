@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from 'react';
 import './login.css'
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword,sendPasswordResetEmail,getAuth } from "firebase/auth";
 import { storage, db, auth } from "../component/firebaseConfigcopy";
 import { useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
@@ -8,15 +8,14 @@ import Footer from '../bignning/Footer';
 import { Timestamp,collection, onSnapshot, orderBy, query,addDoc,doc,where } from "firebase/firestore";
 
 export default function Login() {
-
   let navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [profileinfo,setProfileInfo] =useState([]);
  const [message,setMessage]= useState("2,just login Now");
+
  const [Active,setActive]= useState("");
-  const checkUP=async()=>{
-   
+  const checkUP=()=>{
       const articleRef = collection(db, "User");
       const q = query(articleRef,  where("Email", "==", email));
       onSnapshot(q, (snapshot) => {
@@ -27,31 +26,46 @@ export default function Login() {
         setProfileInfo(user);
         console.log(user);
       });
-   
   }
+
   const login=(info)=>{
     setMessage(info);
   }
   const handleLogin = async () => {
-
+          
     try {
       await signInWithEmailAndPassword(auth, email, password);
+      
       navigate("/");
     
     } catch (error) {
       setMessage(error.code, { type: "error" });
     }
   };
+  const ResetPassword=async()=>{
+    await sendPasswordResetEmail(auth, email)
+  .then(() => {
+    // Password reset email sent!
+    // ..
+    alert("Password reset email sent!");
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    // ..
+    alert(errorMessage)
+  });
+  }
   return (
    
-<section class="min-vh-100 mb-8" >
-    <div class="page-header align-items-start min-vh-50  pt-5 pb-11 m-3 border-radius-lg back" >
+<section class="min-vh-100 " >
+    <div class="page-header align-items-start min-vh-50   pb-11 m-3 border-radius-lg back" >
       <span class="mask bg-gradient-dark opacity-6"></span>
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-lg-5 text-center mx-auto">
             <h1 class="text-white mb-2 mt-5">Welcome!</h1>
-            <p class="text-lead text-white">Use these awesome forms to login or create new account in your project for free.</p>
+            <p class="text-lead text-white"></p>
           </div>
         </div>
       </div>
@@ -112,42 +126,23 @@ export default function Login() {
             <div key={id}>
             {/* <p >{Email} <br/>Type: {Type}<br/>States:{States}</p> */}
           <div class="text-center pt-4" >
-        <>  {Type==="admin"  ? `${States!=="Active" ? 
-        
-        <>
-        {setMessage(  `Your Account Type is ${States} Contact Admin !`)}
-              { setProfileInfo("")} 
-                       
-                        </>
-        
-          
-        :
-        <>
-      
-        {/* {login("90% completed Just click Login NOW")}
-            */}
-                       
-                       
-                        </>
-    } `
-     
-    : <p>Your Account Type is {Type} Contact Admin !</p>}
-    <p class="bg-warning text-dark">{message}</p>
-     </>
+
+
+    
           </div>
           </div>
           )))}
             <div class="card-body">
            
              <div class="mb-3">
-                  <input type="email" class="form-control" placeholder="Email" aria-label="Email" aria-describedby="email-addon"
+                  <input type="email" class="form-control" required placeholder="Email" aria-label="Email" aria-describedby="email-addon"
                    onChange={(e) => {
                     setEmail(e.target.value);
                   }}
                   />
                 </div>
                 <div class="mb-3 mb-0">
-                  <input type="password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="password-addon"
+                  <input type="password" minlength="8" required class="form-control" placeholder="Password" aria-label="Password" aria-describedby="password-addon"
                    onChange={(e) => {
                     setPassword(e.target.value);
                   }}
@@ -157,7 +152,7 @@ export default function Login() {
                 <div class="text-center ">
                   <button type="submit" class="btn btn-primary w-100 my-1 mb-2" onClick={profileinfo.length === 0 ? checkUP:handleLogin} >Sign in</button>
                 </div>
-                <p class="text-sm mt-3 mb-0"> <a href="javascript:;" class="text-dark font-weight-bolder">Reset Password?</a></p>
+                <p class="text-sm mt-3 mb-0"> <a onClick={ResetPassword} class="text-dark font-weight-bolder">Reset Password?</a></p>
              
             </div>
           </div>

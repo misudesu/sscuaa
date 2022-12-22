@@ -1,16 +1,13 @@
 import GroupTitle from '../quiz/GroupTitle'
-import { v4 } from "uuid";
-import  { Component, useEffect, useState } from 'react'
+
+import  {  useEffect, useState } from 'react'
 import {toast} from "react-toastify";
-import StartFirebase from './firebaseConfig';
+
 import { Timestamp,collection, onSnapshot, orderBy, query,addDoc,doc } from "firebase/firestore";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { storage, db, auth } from "../component/firebaseConfigcopy";
-import  {v4 as uuidv4 } from "uuid"
-import { useLocation } from 'react-router';
-export default function Addcourse() {
 
- 
+export default function Addcourse() {
   const [progress, setProgress] = useState(0);
   
   const [QUESTIONgroup, setArticles] = useState([]);
@@ -38,8 +35,7 @@ const [formData, setFormData] = useState({
   TotalHoure:"",
    Level:"",
    Catagory:"",
-   Certificate:"",  
-   Certifed:"",
+  
    ResourseLink:"",
    IQQuestion:"",
    Reletedcourse:"",
@@ -72,7 +68,7 @@ const handleChange = (e) => {
 };
 
 const handlePublish = () => {
-  if (!formData.Certificate || !formData.LectureImage|| !formData.coverimage) {
+  if ( !formData.LectureImage|| !formData.coverimage|| !formData.Lecturename) {
     alert("Please fill all the fields");
     return;
   }
@@ -82,10 +78,7 @@ const handlePublish = () => {
     `/Course/${Date.now()}${formData.LectureImage.name}`
   );
 
-  const storageRefCer = ref(
-    storage,
-    `/Course/${Date.now()}${formData.Certificate.name}`
-  );
+  
 
   const storageRefCoImage = ref(
     storage,
@@ -93,7 +86,7 @@ const handlePublish = () => {
   );
 
   const LectureImage = uploadBytesResumable(storageRefLImage, formData.LectureImage);
-  const Certificate = uploadBytesResumable(storageRefCer, formData.Certificate);
+
   const CoverImage = uploadBytesResumable(storageRefCoImage, formData.coverimage);
 
   LectureImage.on(
@@ -120,18 +113,7 @@ const handlePublish = () => {
           console.log(err);
         },
         () => {
-      Certificate.on(
-    "state_changed",
-    (snapshot) => {
-      const progressPercent = Math.round(
-        (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-      );
-      setProgress(progressPercent);
-    },
-    (err) => {
-      console.log(err);
-    },
-    () => {
+     
   setFormData({
     Lecturename:"",
     LectureImage:"",
@@ -139,8 +121,7 @@ const handlePublish = () => {
     TotalHoure:"",
      Level:"",
      Catagory:"",
-     Certificate:"",  
-     Certifed:"",
+     
      ResourseLink:"",
      IQQuestion:"",
      Reletedcourse:"",
@@ -154,7 +135,7 @@ const handlePublish = () => {
   
   getDownloadURL(LectureImage.snapshot.ref).then((LImage) => {
     const articleRef = collection(db, "Course");
-     getDownloadURL(Certificate.snapshot.ref).then((CImage)=>{
+   
       getDownloadURL(CoverImage.snapshot.ref).then((COImage)=>{
    addDoc(articleRef, {
     Lecturename:formData.Lecturename,
@@ -164,8 +145,8 @@ const handlePublish = () => {
     TotalHoure:formData.TotalHoure,
      Level:formData.Level,
      Catagory:formData.Catagory,
-     Certificate:CImage,  
-     Certifed:formData.Certifed,
+    
+   
      ResourseLink:formData.ResourseLink,
      IQQuestion:formData.IQQuestion,
      Reletedcourse:formData.Reletedcourse,
@@ -177,20 +158,19 @@ const handlePublish = () => {
     createdAt: Timestamp.now().toDate(),
     })
       .then(() => {
-        toast("Article added successfully", { type: "success" });
+        alert("Article added successfully", { type: "success" });
         setProgress(0);
       })
       .catch((err) => {
-        toast("Error adding article", { type: "error" });
+        alert("Error adding article", { type: "error" });
       });
     });
-  });
+ 
   });
 }
 );
         });
-}
-);
+
 
 };
 
@@ -201,7 +181,7 @@ const handlePublish = () => {
 	  ) : (
      <div className="row g-5">
       <div className="col-md-5 col-lg-4 order-md-last">
-       <GroupTitle DB="Course"/>
+       {/* <GroupTitle DB="Course"/> */}
       </div>
       <div className="col-md-7 col-lg-8">
         <h4 className="mb-3">Add a course in detile!</h4>
@@ -294,25 +274,7 @@ const handlePublish = () => {
               </div>
             </div>
            
-            <div className="col-md-5">
-              <label for="cert" className="form-label">Certificate</label>
-              <input type="file" className="form-control" name="Certificate" id="cert" placeholder="" 
-                accept="image/*"
-                onChange={(e) => handleImageChange(e)}/>
-  <div className="invalid-feedback">
-                certificate required.
-              </div>
-            </div>
-         <div className="col-md-2">
-              <label for="cert" className="form-label">Certifed</label>
-              <input type="number" className="form-control" name="Certifed" id="cert" placeholder="number" 
-               value= {formData.Certifed}
-               onChange={(e) => handleChange(e)}
-              />
-              <div className="invalid-feedback">
-                certifed required.
-              </div>
-            </div>
+          
 
             <div className="col-12">
               <label for="resourse" className="form-label">Resourse Link <span className="text-muted"></span></label>

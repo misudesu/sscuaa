@@ -3,8 +3,8 @@ import { v4 } from "uuid";
 import  { Component } from 'react'
 import {toast} from "react-toastify";
 import StartFirebase from './component/firebaseConfig';
-import { Timestamp,collection, onSnapshot, orderBy, query,addDoc,doc } from "firebase/firestore";
-import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { Timestamp,collection, onSnapshot, orderBy, query,addDoc,doc,deleteDoc } from "firebase/firestore";
+import { ref, uploadBytesResumable, getDownloadURL,deleteObject } from "firebase/storage";
 import { storage, db, auth } from "./component/firebaseConfigcopy";
 import  {v4 as uuidv4 } from "uuid"
 import { Link } from 'react-router-dom';
@@ -13,7 +13,7 @@ import AddLive from './AddLive';
 export function  Live() {
 
  const [state,setState]=useState({
-    head: ["s.n","image","title","reating","catagory","Action"] });
+    head: ["image","title","reating","catagory","Action"] });
   const [articles, setArticles] = useState([]);
 
   useEffect(() => {
@@ -28,6 +28,20 @@ export function  Live() {
       console.log(articles);
     });
   }, []);
+   
+const handleDelete =(id,Image)=>  {
+  try {
+      deleteDoc(doc(db,"Live", id));
+      // collection(db, "Book");
+      alert("Article deleted successfully", { type: "success" });
+      const storageRef = ref(storage,Image);
+      deleteObject(storageRef);
+    } catch (error) {
+      alert("Error deleting article", { type: "error" });
+      console.log(error);
+    }
+  
+};
   return (
     <div> 
   
@@ -68,13 +82,13 @@ export function  Live() {
             createdAt
           }) => (
               <tr key={id}>
- <td >{articles.length}</td>  
+  
  <td> <Link to="/viewLive"> <img data-bs-toggle="modal"  width="30" height="30" src={LiveImage}/> </Link>
 <a></a> </td>  
 <td className="text-black">{LiveTitle}</td>
 <td>{Rating}</td>
 <td>{Category}</td>
-<td><button class="btn btn-sm btn-danger">delete</button>  <Link  to={ `/LiveRoom/` }
+<td><button onClick={()=>handleDelete(id,LiveImage)} class="btn btn-sm btn-danger">delete</button>  <Link  to={ `/LiveRoom/` }
      
        class="mx-2 btn-sm btn btn-primary"  type=''>view</Link>
            <a   href={Liveurl} target="_blank" rel="noopener"> <button class="btn btn-sm btn-outline-danger ">Start Live</button>  </a>

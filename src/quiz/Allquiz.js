@@ -2,7 +2,9 @@ import React, { Component, useEffect, useState } from 'react'
 import Iqquestion  from './Iqquestion'
 import {  Link } from 'react-router-dom'
 import { auth, db } from "../component/firebaseConfigcopy";
-import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
+import { collection, onSnapshot, orderBy, query,addDoc,doc, deleteDoc } from "firebase/firestore";
+
+
 import GroupTitle from './GroupTitle';
 function Allquiz(props){
   const [IQquestion,setIQuestion]=useState([]);
@@ -23,6 +25,18 @@ function Allquiz(props){
        
      })
     const[data,setData]=useState(0)
+    const handleDelete =(id,)=>  {
+      try {
+          deleteDoc(doc(db, "IQ", id));
+          // collection(db, "Book");
+          alert("Article deleted successfully", { type: "success" });
+         
+        } catch (error) {
+          alert("Error deleting article", { type: "error" });
+         
+        }
+      
+    };
   return (
     <div> 
     <div class="row">
@@ -70,7 +84,7 @@ IQquestion.map(
     
     <td className="text-black">{title}</td>
     <td>{createdAt.toDate().toDateString()}</td>
-    <td><button class="btn btn-sm btn-danger">delete</button> 
+    <td><button onClick={()=>{handleDelete(id)}} class="btn btn-sm btn-danger">delete</button> 
     <Link to={ `/AddIQ/${id}` }
       state={{ GroupT:title,
       ids:id}}    

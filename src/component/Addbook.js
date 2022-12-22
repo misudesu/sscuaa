@@ -157,7 +157,8 @@ const handlePublish = () => {
                        className="form-control" name="BookTitle" id="" aria-describedby="helpId" placeholder="name of book"
                        value={formData.BookTitle}
                        onChange={(e) => handleChange(e)} />
-                </div>    
+                </div>   
+                 
                    <div className="col-md-4">
                        <small id="helpId" className="form-text text-muted">Auther</small>
                        <input type="text|password|email|number|submit|date|datetime|datetime-local|month|color|range|search|tel|time|url|week"

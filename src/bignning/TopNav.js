@@ -6,8 +6,8 @@ export default function TopNav() {
    
 {/* <!-- Navbar Start --> */}
 
-<nav class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0 ">
-< Link to={"/"} className="navbar-brand d-flex align-items-center px-4 px-lg-5">
+<nav class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top  ">
+< Link to={"/"} className="navbar-brand d-flex align-items-center px-4 ">
             <h2 className="m-0 text-primary"><i className="fa fa-book me-3"></i>SSCUAA Skill</h2>
         </Link>
         <button type="button" className="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
@@ -23,8 +23,8 @@ export default function TopNav() {
                 <div className="nav-item dropdown">
                     <a href="#" className="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
                     <div className="dropdown-menu fade-down m-0">
-                    <Link to={ "/Team"}  className="dropdown-item">Our Team </Link>
-                    <Link to={ "/testamonal"} className="dropdown-item">Testimonial</Link>
+                    <Link to={ "/Team"}  className="dropdown-item">Our Instracters </Link>
+                    {/* <Link to={ "/testamonal"} className="dropdown-item">Testimonial</Link> */}
                     <Link to={ "/ide"} className="dropdown-item">IDE</Link>
                     <Link to={ "/LiveRoom/"} className="nav-item nav-link">Live Class</Link>
                     </div>

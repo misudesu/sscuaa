@@ -4,9 +4,9 @@ import Button from './Button';
 import Editor from './Editor';
 import {BrowserRouter as Router,Route,Routes,Link,useParams,useLocation} from 'react-router-dom'
 
-export default function Ide() {
+export default function Ides(props) {
  
-
+  props.funcNav(false);
   const [openedEditor, setOpenedEditor] = useState('html');
   const [html, setHtml] = useState('');
   const [css, setCss] = useState('');

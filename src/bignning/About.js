@@ -62,54 +62,24 @@ export default function About() {
             </h6>
             <h1 class="mb-4">Welcome to SSCUAA </h1>
             <p class="mb-4">
-            
-            </p>
-            <p class="mb-4">
-            At SSCUAA, we believe everyone should have the opportunity to create progress 
-            through technology and develop the skills of tomorrow. With assessments, 
+                    At SSCUAA, we believe everyone should have the opportunity to create progress 
+            through technology and develop the skills of tomorrow. With IQ Question,tool, 
             learning paths and courses authored by Skilled Instructors experts, 
-            our platform helps businesses and individuals benchmark expertise across roles,
+            our platform helps student and lectures, benchmark expertise across roles,
            speed up release cycles and build reliable, secure products.
-            </p>
-           
-            <div class="row gy-2 gx-4 mb-4">
-              <div class="col-sm-6">
-                <p class="mb-0">
-                  <i class="fa fa-arrow-right text-primary me-2"></i>Skilled
-                  Instructors
-                </p>
-              </div>
-              <div class="col-sm-6">
-                <p class="mb-0">
-                  <i class="fa fa-arrow-right text-primary me-2"></i>Online
-                  Classes
-                </p>
-              </div>
-              <div class="col-sm-6">
-                <p class="mb-0">
-                  <i class="fa fa-arrow-right text-primary me-2"></i
-                  >International Certificate
-                </p>
-              </div>
-              <div class="col-sm-6">
-                <p class="mb-0">
-                  <i class="fa fa-arrow-right text-primary me-2"></i>Skilled
-                  Instructors
-                </p>
-              </div>
-              <div class="col-sm-6">
-                <p class="mb-0">
-                  <i class="fa fa-arrow-right text-primary me-2"></i>Online
-                  Classes
-                </p>
-              </div>
-              <div class="col-sm-6">
-                <p class="mb-0">
-                  <i class="fa fa-arrow-right text-primary me-2"></i
-                  >International Certificate
-                </p>
-              </div>
-            </div>
+                    </p>
+                    <div class="row gy-2 gx-4 mb-4">
+                        <div class="col-sm-6">
+                            <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Skilled Instructors</p>
+                        </div>
+                        <div class="col-sm-6">
+                            <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Online Classes</p>
+                        </div>
+                        <div class="col-sm-6">
+                            <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>International Certificate</p>
+                        </div>
+                        
+                    </div>
             
           </div>
         </div>

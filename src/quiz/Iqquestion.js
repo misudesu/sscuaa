@@ -16,7 +16,7 @@ import 'react-toastify/dist/ReactToastify.css';
   const [progress, setProgress] = useState(0);
   
   const SelectionOption=(e)=>{
- 
+   
  setFormData({
    GroupTitle:GroupT,
    ID:ID
@@ -99,7 +99,7 @@ const handlePublish=()=>{
         <div class=" row  form-group">
 
         <label for="country" class="form-label">Group Title</label>
-      
+       
         <input class="form-select" value={GroupT}
         readOnly
         onChange={SelectionOption} name="title" id="question" />

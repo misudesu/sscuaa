@@ -131,14 +131,14 @@ const handlePublish = () => {
 <div className="col-md-6"> 
                  <small id="helpId" className="form-text text-muted">Live of Discrption</small>
                    <input type="text"
-                     className="form-control" name="Discrption" id="" aria-describedby="helpId" placeholder="Live of content"
+                     className="form-control" required name="Discrption" id="" aria-describedby="helpId" placeholder="Live of content"
                      value={formData.Discrption}
                      onChange={(e) => handleChange(e)} />
 </div>
 <legend>Book information:</legend>
 <div className="col-md-4"> 
                      <small id="helpId" className="form-text text-muted">Live title</small>
-                     <input type="text"
+                     <input type="text" required
                        className="form-control" name="LiveTitle" id="" aria-describedby="helpId" placeholder="name of book"
                        value={formData.BookTitle}
                        onChange={(e) => handleChange(e)} />
@@ -146,21 +146,21 @@ const handlePublish = () => {
                    <div className="col-md-4">
                        <small id="helpId" className="form-text text-muted">Lecture</small>
                        <input type="text|password|email|number|submit|date|datetime|datetime-local|month|color|range|search|tel|time|url|week"
-                         className="form-control" name="Lecture" id="" aria-describedby="helpId" placeholder="misael dessalegn"
+                       required  className="form-control" name="Lecture" id="" aria-describedby="helpId" placeholder="misael dessalegn"
                          value={formData.Auther}
                          onChange={(e) => handleChange(e)}  />
               </div>
               <div className="col-md-4">       
                          <small id="helpId" className="form-text text-muted">Start date </small>
                          <input type="date"
-                           className="form-control" name="createdAt" id="" aria-describedby="helpId" placeholder=""
+                         required  className="form-control" name="createdAt" id="" aria-describedby="helpId" placeholder=""
                            value={formData.createdAt}
                            onChange={(e) => handleChange(e)} />
                          </div>
                          <div className="col-md-4">       
                          <small id="helpId" className="form-text text-muted">rating</small>
                          <input type="number"
-                           className="form-control" name="Rating"   id="" aria-describedby="helpId" placeholder="0"
+                      required     className="form-control" name="Rating"   id="" aria-describedby="helpId" placeholder="0"
                            value={formData.Rating}
                            onChange={(e) => handleChange(e)} />
                          </div>
@@ -168,7 +168,7 @@ const handlePublish = () => {
                          <div className="col-md-4">       
                          <small id="helpId" className="form-text text-muted">Live cover</small>
                          <input type="file"
-                           className="form-control" name="LiveImage" id="" aria-describedby="helpId" placeholder=""
+                      required     className="form-control" name="LiveImage" id="" aria-describedby="helpId" placeholder=""
                            accept="image/*"
                           onChange={(e) => handleImageChange(e)}/>
                                         
@@ -176,8 +176,8 @@ const handlePublish = () => {
                          </div>
                          <div className="col-md-4">       
                          <small id="helpId" className="form-text text-muted">Live Url</small>
-                         <input type="url|text"
-                           className="form-control" name="Liveurl"   id="" aria-describedby="helpId" placeholder="https://"
+                         required    <input type="url|text"
+                           className="form-control" name="Liveurl"   id="" aria-describedby="helpId" placeholder="https://sscuaa.web.app"
                            value={formData.Liveurl}
                            onChange={(e) => handleChange(e)} />
                          </div>

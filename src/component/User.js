@@ -3,9 +3,9 @@ import {BrowserRouter as Router,Route,Routes,Link} from 'react-router-dom'
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { storage, db, auth } from "../component/firebaseConfigcopy";
 import { toast } from "react-toastify";
-import { Timestamp,collection, onSnapshot, orderBy, query,addDoc,doc,updateDoc, where } from "firebase/firestore";
+import { Timestamp,collection, onSnapshot, orderBy, query,addDoc,doc,updateDoc, where ,deleteDoc} from "firebase/firestore";
 
-import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { ref, uploadBytesResumable, getDownloadURL,deleteObject } from "firebase/storage";
 
 export default function User() {
   const [articles, setArticles] = useState([]);
@@ -20,6 +20,20 @@ export default function User() {
       console.log(articles);
     });
   }, []);
+  
+const handleDelete =(id,Image)=>  {
+  try {
+      deleteDoc(doc(db,"User", id));
+      // collection(db, "Book");
+      alert("Article deleted successfully", { type: "success" });
+      const storageRef = ref(storage,Image);
+      deleteObject(storageRef);
+    } catch (error) {
+      alert("Error deleting article", { type: "error" });
+      console.log(error);
+    }
+  
+};
   return (
       <>
        <div class="col-4 my-5">
@@ -59,7 +73,7 @@ export default function User() {
                         <td class="fw-bold">{States}</td>
                         <td>
                         
-                           <button class="btn btn-outline-danger">Delete</button>
+                           <button onClick={()=>handleDelete(id,Image)} class="btn btn-outline-danger">Delete</button>
                            <Link to={`/userview/${id}`} 
                              state={{ 
                               ids:id,

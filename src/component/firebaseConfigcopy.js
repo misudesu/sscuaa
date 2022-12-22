@@ -9,11 +9,12 @@ import  database  from "firebase/database";
 const firebaseConfig = {
   apiKey: "AIzaSyBapN-UOG1HQhMX5b08geT4_JkTJ2poGRQ",
   authDomain: "sscuaa.firebaseapp.com",
+  databaseURL: "https://sscuaa-default-rtdb.firebaseio.com",
   projectId: "sscuaa",
   storageBucket: "sscuaa.appspot.com",
   messagingSenderId: "530312440281",
   appId: "1:530312440281:web:cd4028b8720acf81b4d1c8",
- 
+  measurementId: "G-JP4XLSFZQK"
 };
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);

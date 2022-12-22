@@ -21,8 +21,8 @@ export function Home () {
                                 <h1 class="display-3 text-white animated slideInDown">The Best Online Learning Platform</h1>
                                 <p class="fs-5 text-white lead mb-4 pb-2">Take control of your career
 Whether you want to transition into a new field, improve in your role or bring your big ideas to life, SSCUAA Skills can help you get there. With our technology skills platform, you can build in-demand skills and apply them in the real world with confidence.</p>
-                                <a href="" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Read More</a>
-                                <a href="/login" class="btn btn-light py-md-3 px-md-5 animated slideInRight">Join Now</a>
+                                <a href="/login" class="btn btn-primary py-md-3 px-md-5 animated slideInRight">Join Now</a>
+                                
                                 
                             </div>
                         </div>
@@ -92,9 +92,9 @@ Whether you want to transition into a new field, improve in your role or bring y
                     <h1 class="mb-4">Welcome to SSCUAA</h1>
                     <p class="mb-4">
                     At SSCUAA, we believe everyone should have the opportunity to create progress 
-            through technology and develop the skills of tomorrow. With assessments, 
+            through technology and develop the skills of tomorrow. With IQ Question,tool, 
             learning paths and courses authored by Skilled Instructors experts, 
-            our platform helps businesses and individuals benchmark expertise across roles,
+            our platform helps student and lectures, benchmark expertise across roles,
            speed up release cycles and build reliable, secure products.
                     </p>
                     <div class="row gy-2 gx-4 mb-4">
@@ -107,15 +107,7 @@ Whether you want to transition into a new field, improve in your role or bring y
                         <div class="col-sm-6">
                             <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>International Certificate</p>
                         </div>
-                        <div class="col-sm-6">
-                            <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Skilled Instructors</p>
-                        </div>
-                        <div class="col-sm-6">
-                            <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Online Classes</p>
-                        </div>
-                        <div class="col-sm-6">
-                            <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>International Certificate</p>
-                        </div>
+                        
                     </div>
                     
                 </div>
@@ -373,11 +365,11 @@ Whether you want to transition into a new field, improve in your role or bring y
                 <h6 class="section-title bg-white text-center text-primary px-3">Developer Team </h6>
                 <h1 class="mb-5"> Experts </h1>
             </div>
-            <div class="row g-4">
-                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+            <div class="row justify-content-center g-4" >
+                <div class="col-lg-3 col-md-6 wow fadeInUp" style={{width:220}} data-wow-delay="0.1s">
                     <div class="team-item bg-light">
                         <div class="overflow-hidden">
-                            <img class="img-fluid" src="img/team-1.jpg" alt=""/>
+                            <img class="img-fluid "  src="img/misu-1.jpg" alt=""/>
                         </div>
                         <div class="position-relative d-flex justify-content-center" style={{margintop: '-23px'}}>
                             <div class="bg-light d-flex justify-content-center pt-2 px-1">
@@ -392,10 +384,10 @@ Whether you want to transition into a new field, improve in your role or bring y
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                <div class="col-lg-3 col-md-6 wow fadeInUp" style={{width:220}} data-wow-delay="0.3s">
                     <div class="team-item bg-light">
                         <div class="overflow-hidden">
-                            <img class="img-fluid" src="img/team-2.jpg" alt=""/>
+                            <img class="img-fluid" src="img/maki-1.jpg" alt=""/>
                         </div>
                         <div class="position-relative d-flex justify-content-center" style={{margintop: '-23px'}}>
                             <div class="bg-light d-flex justify-content-center pt-2 px-1">
@@ -410,10 +402,10 @@ Whether you want to transition into a new field, improve in your role or bring y
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
+                <div class="col-lg-3 col-md-6 wow fadeInUp" style={{width:220}} data-wow-delay="0.5s">
                     <div class="team-item bg-light">
                         <div class="overflow-hidden">
-                            <img class="img-fluid" src="img/team-3.jpg" alt=""/>
+                            <img class="img-fluid" src="img/habte-1.jpg" alt=""/>
                         </div>
                         <div class="position-relative d-flex justify-content-center" style={{margintop: '-23px'}}>
                             <div class="bg-light d-flex justify-content-center pt-2 px-1">
@@ -428,10 +420,10 @@ Whether you want to transition into a new field, improve in your role or bring y
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
+                <div class="col-lg-3 col-md-6 wow fadeInUp" style={{width:220}} data-wow-delay="0.7s">
                     <div class="team-item bg-light">
                         <div class="overflow-hidden">
-                            <img class="img-fluid" src="img/team-4.jpg" alt=""/>
+                            <img class="img-fluid" src="img/beki-1.jpg" alt=""/>
                         </div>
                         <div class="position-relative d-flex justify-content-center" style={{margintop: '-23px'}}>
                             <div class="bg-light d-flex justify-content-center pt-2 px-1">
@@ -446,10 +438,10 @@ Whether you want to transition into a new field, improve in your role or bring y
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
+                <div class="col-lg-3 col-md-6 wow fadeInUp" style={{width:220}}  data-wow-delay="0.7s">
                     <div class="team-item bg-light">
                         <div class="overflow-hidden">
-                            <img class="img-fluid" src="img/team-1.jpg" alt=""/>
+                            <img class="img-fluid" src="img/yenu-1.jpg" alt=""/>
                         </div>
                         <div class="position-relative d-flex justify-content-center" style={{margintop: '-23px'}}>
                             <div class="bg-light d-flex justify-content-center pt-2 px-1">

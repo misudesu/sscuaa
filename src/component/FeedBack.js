@@ -3,9 +3,9 @@ import {BrowserRouter as Router,Route,Routes,Link} from 'react-router-dom'
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { storage, db, auth } from "../component/firebaseConfigcopy";
 import { toast } from "react-toastify";
-import { Timestamp,collection, onSnapshot, orderBy, query,addDoc,doc,updateDoc, where } from "firebase/firestore";
+import { Timestamp,collection, onSnapshot, orderBy, query,addDoc,doc,updateDoc, where,deleteDoc } from "firebase/firestore";
 
-import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { ref, uploadBytesResumable, getDownloadURL,deleteObject } from "firebase/storage";
 
 export default function FeedBack() {
   const [FeedBack, setFeedBack] = useState([]);
@@ -29,6 +29,19 @@ export default function FeedBack() {
       States: "Viewed",
     });
 }
+
+const handleDelete =(id)=>  {
+  try {
+      deleteDoc(doc(db,  "User","FeedBack","GeneralFeedBack", id));
+      // collection(db, "Book");
+      alert("Article deleted successfully", { type: "success" });
+    
+    } catch (error) {
+      alert("Error deleting article", { type: "error" });
+      console.log(error);
+    }
+  
+};
   return (
       <>
        <div class="col-4 my-5">
@@ -68,10 +81,10 @@ export default function FeedBack() {
                         <td class="fw-bold">{feedBack}</td>
                         <td>
                         
-                           <button class="btn btn-outline-danger">Delete</button>
+                           <button onClick={()=>{handleDelete(id)}} class="btn btn-sm btn-outline-danger">Delete</button>
                            <button 
                            name={id} onClick={(e) => View(e)}
-                             class="mx-2 btn btn-outline-primary" >view</button>
+                             class="mx-2 btn-sm btn btn-outline-primary" >view</button>
                            
                         </td>
                       </tr>

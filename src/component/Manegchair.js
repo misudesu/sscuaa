@@ -3,9 +3,9 @@ import { useNavigate } from "react-router-dom";
 import { createUserWithEmailAndPassword, updateProfile, deleteUser,reauthenticateWithCredential} from "firebase/auth";
 import { storage, db, auth } from "../component/firebaseConfigcopy";
 import { toast } from "react-toastify";
-import { Timestamp,collection, onSnapshot, orderBy, query,addDoc,doc,updateDoc, where } from "firebase/firestore";
+import { Timestamp,collection, onSnapshot, orderBy, query,addDoc,doc,updateDoc, where,deleteDoc } from "firebase/firestore";
 
-import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { ref, uploadBytesResumable, getDownloadURL,deleteObject } from "firebase/storage";
 import { useAuthState } from "react-firebase-hooks/auth";
 
 import {BrowserRouter as Router,Route,Routes,Link,useParams,useLocation} from 'react-router-dom'
@@ -164,16 +164,30 @@ const handlePublish = () => {
   }
 const Delete=(e)=>{
   
-const user = auth.currentUser;
-alert(user);
-// deleteUser(user).then(() => {
-//   // User deleted.
-//   alart("user Deleted")
-// }).catch((error) => {
-//   // An error ocurred
-//   // ...
-// });
+const user = auth.currentUser?.uid;
+
+deleteUser(user).then(() => {
+  // User deleted.
+  
+}).catch((error) => {
+  // An error ocurred
+  // ...
+});
 }
+ 
+const handleDelete =(id,Image)=>  {
+  try {
+      deleteDoc(doc(db,"User", id));
+      // collection(db, "Book");
+      alert("Article deleted successfully", { type: "success" });
+      const storageRef = ref(storage,Image);
+      deleteObject(storageRef);
+    } catch (error) {
+      alert("Error deleting article", { type: "error" });
+      console.log(error);
+    }
+  
+};
   return (
      
     <div class="">
@@ -190,7 +204,7 @@ alert(user);
 <div class="col-md-4"> 
             <small id="helpId" class="form-text text-muted">Email</small>
               <input type="email"
-                class="form-control" name="Email" id="" aria-describedby="helpId" placeholder="email"
+           required     class="form-control" name="Email" id="" aria-describedby="helpId" placeholder="email"
                 onChange={(e) => {
                   setEmail(e.target.value);
                 }}
@@ -199,7 +213,7 @@ alert(user);
 <div class="col-md-4"> 
                 <small id="helpId" class="form-text text-muted">Password</small>
                     <input type="password"
-                  class="form-control" name="Password" id="" aria-describedby="helpId" placeholder="password"
+                  class="form-control" name="Password" minlength="8" required id="" aria-describedby="helpId" placeholder="password"
                   onChange={(e) => {
                     setPassword(e.target.value);
                   }}
@@ -281,7 +295,7 @@ alert(user);
             createdAt
           }) => (
               <tr key={id}>
-<td><Link to="/profile"><img  width="50" height="50" src={Image}/> </Link> </td>
+<td><Link to=""><img  width="50" height="50" src={Image}/> </Link> </td>
 <td>{userName}</td>
 <td>{Email}</td>
 <td>{phoneNumber}</td>
@@ -289,7 +303,7 @@ alert(user);
 <td>
 <button class="btn btn-danger" name={id} onClick={(e) => update(e)}>D-Active</button>
 <button class="mx-2 btn btn-primary"  name={id} onClick={(e) => Active(e)}>Active</button>
-<button class="mx-2 btn btn-primary"  name={id} onClick={(e) => Delete(e)}>Delete</button>
+<button class="mx-2 btn btn-primary"  name={id} onClick={(e) => {Delete(e);handleDelete(id,Image);}}>Delete</button>
 </td>
 </tr>
           )))}

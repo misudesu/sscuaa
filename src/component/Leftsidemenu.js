@@ -1,12 +1,27 @@
-import React from 'react'
+import React,{useEffect,useState} from 'react'
 import {BrowserRouter as Router,Route,Routes,Link} from 'react-router-dom'
 import Footer from './Footer'
 import { signOut } from "firebase/auth";
 import { storage, db, auth } from "../component/firebaseConfigcopy";
+import { Timestamp,collection, onSnapshot, orderBy, query,addDoc,doc,updateDoc, where,deleteDoc } from "firebase/firestore";
+
 export default function Leftsidemenu(props) {
+    const [articles, setArticles] = useState([]);
+  useEffect(() => {
+    const articleRef = collection(db, "User");
+    const q = query(articleRef,  where("Email", "==", auth.currentUser?.email));
+      onSnapshot(q, (snapshot) => {
+      const articles = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      setArticles(articles);
+      console.log(articles);
+    });
+  }, []);
   return (
    
-    <div class="mx-0 my-0 mt-0">
+    <div>
  <div className="leftside-menu">
   <a href="#" className="logo text-center logo-light">
         <span className="logo-lg">
@@ -53,13 +68,13 @@ export default function Leftsidemenu(props) {
   
 
                 <li className="side-nav-item">
-                    <a data-bs-toggle="collapse" href="#sidebarEcommerce" aria-expanded="false" aria-controls="sidebarEcommerce" className="side-nav-link">
-                    <i class="bi bi-folder-plus"></i>
+                    <a data-bs-toggle="collapse" href="#sidebarCourse" aria-expanded="false" aria-controls="sidebarCourse" className="side-nav-link">
+                    <i className="bi bi-folder-plus"></i>
                     
                         <span> Course </span>
                     
                     </a>
-                    <div className="collapse" id="sidebarEcommerce">
+                    <div className="collapse" id="sidebarCourse">
                         <ul className="side-nav-second-level">
                         
                             <li>
@@ -77,7 +92,7 @@ export default function Leftsidemenu(props) {
 
                 <li className="side-nav-item">
                     <a data-bs-toggle="collapse" href="#sidebarPages" aria-expanded="false" aria-controls="sidebarPages" className="side-nav-link">
-                    <i class="bi bi-book"></i>                  
+                    <i className="bi bi-book"></i>                  
                      <span>Book </span>
                       
                     </a>
@@ -98,16 +113,16 @@ export default function Leftsidemenu(props) {
                 </li>
                         
   <li className="side-nav-item">
-                    <a data-bs-toggle="collapse" href="#sidebarreport" aria-expanded="false" aria-controls="sidebarEcommerce" className="side-nav-link">
-                    <i class="bi bi-flag-fill"></i>                     
-                      <span> Report </span>
+                    <a data-bs-toggle="collapse" href="#sidebarreport" aria-expanded="false" aria-controls="sidebarCourse" className="side-nav-link">
+                    <i className="bi bi-flag-fill"></i>                     
+                      <span> User Review  </span>
                         
                     </a>
                     <div className="collapse" id="sidebarreport">
                         <ul className="side-nav-second-level">
                             <li>
                               
-                                <Link to="/feedback"> View report   </Link>
+                                <Link to="/feedback"> User Review   </Link>
                             </li>
                           <li>
                        </li>
@@ -117,7 +132,7 @@ export default function Leftsidemenu(props) {
 
                 <li className="side-nav-item">
                     <a data-bs-toggle="collapse" href="#sidebarEmail" aria-expanded="false" aria-controls="sidebarEmail" className="side-nav-link">
-                    <i class="bi bi-gear"></i>
+                    <i className="bi bi-gear"></i>
                         <span> Manage System </span>
                        
                     </a>
@@ -127,12 +142,35 @@ export default function Leftsidemenu(props) {
                             <li>
                                 <Link to="/user"> Manage user   </Link>
                             </li>
-                            <li>
-                                <Link to={ "/manegchair/front-end"}
-                                  state={{ state: 'mystate' }}>Manage Chir head </Link>
-                            </li>
-                            
-                           
+ {articles.length === 0 ?(
+
+<></>
+):(
+    articles.map(({
+        id,
+        userName,
+        Image,
+        Email,
+        Type,
+        States,
+        phoneNumber,
+        createdAt
+    })=>(
+         Type === "Admin"|"admin" ?    <li>
+        <Link to={ "/manegchair/front-end"}
+          state={{ state: 'mystate' }}>Manage Chir head </Link>
+    </li>
+        : 
+          <>
+          </>  
+        
+                       
+    
+                              )
+
+                              )
+                          )}
+                               
                         </ul>
                     </div>
                 </li>
@@ -162,7 +200,7 @@ export default function Leftsidemenu(props) {
                 </li>
                 <li className="side-nav-item">
                 <Link  to="/"  className="side-nav-link">
-                <i class="bi bi-box-arrow-left"></i>
+                <i className="bi bi-box-arrow-left"></i>
                         <span className="btn btn-sm btn-outline-primary" onClick={()=>{signOut(auth)}}> Log out </span>
                   </Link>
                     

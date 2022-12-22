@@ -62,7 +62,7 @@ import './qui.css'
 		<p>please create a new Question</p>
 	  ) : (<>
       {/* 1. Header  */}
-      <h1>USA Quiz 🇺🇸</h1>
+      <h1>IQ  Quiz 🇺🇸</h1>
 
       {/* 2. Current Score  */}
       <h2>Score: {score}</h2>

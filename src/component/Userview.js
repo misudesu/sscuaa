@@ -2,6 +2,7 @@ import { collection, onSnapshot, orderBy, query, where } from 'firebase/firestor
 import React, { useEffect, useState } from 'react'
 
 import {BrowserRouter as Router,Route,Routes,Link,useParams,useLocation} from 'react-router-dom'
+
 import pik from './pik1.png';
 import { storage, db, auth } from "../component/firebaseConfigcopy";
 import './FeedBack.css'
@@ -65,7 +66,6 @@ export default function Userview(props) {
         <div class="col-8  ">
 <div class="row">
     <div class="col-12">
-      
         <legend>Course Activity</legend>
         <table className="table ">
             <thead>
